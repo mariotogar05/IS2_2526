@@ -37,7 +37,7 @@
 	 			</descriptorRefs> 
 	 			<archive> 
 		 			<manifest> 
-		 				<mainClass>es.unican.is2.SegurosMain</mainClass> 
+		 				<mainClass>Runner</mainClass> 
 	 				</manifest> 
  				</archive> 
 			</configuration> 
