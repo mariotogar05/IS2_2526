@@ -3,7 +3,12 @@ public class GestionSeguros implements IGestionSeguros, IGestionClientes, IInfoS
 
 	IClientesDAO daoClientes;
 	ISegurosDAO daoSeguros;
-
+	
+	public GestionSeguros(IClientesDAO daoClientes, ISegurosDAO daoSeguros) {
+		this.daoClientes = daoClientes;
+		this.daoSeguros = daoSeguros;
+	}
+	
 	@Override
 	public Cliente cliente(String dni) throws DataAccessException {
 		Cliente cliente = daoClientes.cliente(dni);
