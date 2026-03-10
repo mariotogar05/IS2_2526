@@ -10,7 +10,7 @@ import java.util.zip.DataFormatException;
  */
 public interface IGestionSeguros {
 	
-	/**
+	/** 
 	 * Agrega un nuevo seguro al cliente cuyo dni se indica.
 	 * @param s Seguro que desea agregar
 	 * @param dni DNI del cliente
