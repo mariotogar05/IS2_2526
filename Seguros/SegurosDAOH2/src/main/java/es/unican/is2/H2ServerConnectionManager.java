@@ -1,9 +1,12 @@
+package es.unican.is2;
 
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import es.unican.is2.DataAccessException;
 
 
 /**
@@ -35,6 +38,8 @@ public class H2ServerConnectionManager {
 				cargaDatos();
 			} catch (SQLException | ClassNotFoundException e) {
 				throw new DataAccessException();
+			}finally{
+			
 			}
 		}
 		return connection;
@@ -103,7 +108,9 @@ public class H2ServerConnectionManager {
 			System.out.println(e);
 			throw new DataAccessException();
 			
-		} 		
+		}finally{
+			
+		}
 	}
 
 	/**
@@ -126,6 +133,8 @@ public class H2ServerConnectionManager {
 		}
 		catch (SQLException e) {
 			throw new DataAccessException(); 
+		}finally{
+			
 		}
 	}
 }

@@ -1,3 +1,4 @@
+package es.unican.is2;
 
 
 import javax.swing.JFrame;
@@ -12,6 +13,13 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JList;
 import javax.swing.border.LineBorder;
+
+import es.unican.is2.Cliente;
+import es.unican.is2.DataAccessException;
+import es.unican.is2.IGestionClientes;
+import es.unican.is2.IGestionSeguros;
+import es.unican.is2.IInfoSeguros;
+import es.unican.is2.Seguro;
 
 import java.awt.Color;
 import javax.swing.JButton;

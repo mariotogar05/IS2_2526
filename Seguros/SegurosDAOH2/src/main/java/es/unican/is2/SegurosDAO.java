@@ -1,3 +1,4 @@
+package es.unican.is2;
 
 
 import java.sql.Connection;
@@ -6,6 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+
+import es.unican.is2.DataAccessException;
+import es.unican.is2.ISegurosDAO;
+import es.unican.is2.Seguro;
 
 
 public class SegurosDAO implements ISegurosDAO {
@@ -63,6 +68,8 @@ public class SegurosDAO implements ISegurosDAO {
 		catch (SQLException e) {
 			e.printStackTrace();
 			throw new DataAccessException();
+		}finally{
+			
 		}
 		return result;
 	}
@@ -83,6 +90,8 @@ public class SegurosDAO implements ISegurosDAO {
 		} catch (SQLException e) {
 			// System.out.println(e);
 			throw new DataAccessException();
+		}finally{
+			
 		}
 
 		return seguros;
@@ -103,6 +112,8 @@ public class SegurosDAO implements ISegurosDAO {
 		}
 		catch (SQLException e) {
 			throw new DataAccessException();
+		}finally{
+			
 		}
 		return result;
 	}
