@@ -19,6 +19,15 @@ public class Seguro {
 
 	private String conductorAdicional;
 
+	Seguro(long id, String maticula, int potencia, Cobertura cobertura,LocalDate fechaInicio, String conductorAdicional){
+		this.id = id;
+		this.matricula = maticula;
+		this.potencia = potencia;
+		this.cobertura = cobertura;
+		this.fechaInicio = fechaInicio;
+		this.conductorAdicional = conductorAdicional;
+	}
+
 	/**
 	 * Retorna el identificador del seguro
 	 */
