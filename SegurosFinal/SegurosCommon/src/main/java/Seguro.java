@@ -19,6 +19,10 @@ public class Seguro {
 
 	private String conductorAdicional;
 
+	Seguro(){
+		
+	}
+
 	Seguro(long id, String maticula, int potencia, Cobertura cobertura,LocalDate fechaInicio, String conductorAdicional){
 		this.id = id;
 		this.matricula = maticula;
