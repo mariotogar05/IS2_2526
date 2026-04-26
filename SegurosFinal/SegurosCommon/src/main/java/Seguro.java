@@ -129,7 +129,7 @@ public class Seguro {
 	 *         0 si el seguro todavía no está en vigor (no se ha alcanzado su fecha de inicio)
      */
 	public double precio() {
-		if (fechaInicio == null) {
+		if (fechaInicio == null || fechaInicio.isAfter(LocalDate.now())) {
 			return 0;
 		}
 		double precio = 0;
@@ -140,7 +140,7 @@ public class Seguro {
 		} else {
 			precio = 400;
 		}
-		if (potencia >= 90 || potencia <= 110) {
+		if (potencia >= 90 && potencia <= 110) {
 			precio = precio + precio * 0.05;
 		} else if (potencia > 110) {
 			precio = precio + precio * 0.2;

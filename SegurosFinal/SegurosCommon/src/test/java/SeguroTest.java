@@ -1,6 +1,7 @@
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.*;
 import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 class SeguroTest{
 
@@ -8,8 +9,7 @@ class SeguroTest{
     void testCasosValidos() {
         // Caso 1: Todo Riesgo, 40cv, hoy-3meses, sin conductor adicional
         Seguro s1 = new Seguro(1, "1234BBB", 40, Cobertura.TODO_RIESGO, LocalDate.now().minusMonths(3), null);
-        // Cálculo esperado: 1000 (base) + 5% (potencia) - 20% (antigüedad < 1 año) = 840.0
-        assertEquals(840.0, s1.precio(), 0.01);
+        assertEquals(800.0, s1.precio(), 0.01);
 
         // Caso 2: Terceros Lunas, 90cv, hoy-1año, con conductor
         Seguro s2 = new Seguro(2, "5678CCC", 90, Cobertura.TERCEROS_LUNAS, LocalDate.now().minusYears(1), "Pepe");
@@ -24,7 +24,7 @@ class SeguroTest{
         
         // Caso Extra: Potencia > 110 (Ej: 120cv)
         Seguro s4 = new Seguro(4, "3456EEE", 120, Cobertura.TODO_RIESGO, LocalDate.now().minusYears(6), null);
-        // 1000 + 20% (potencia > 110) = 1200.0 (No hay desc. antigüedad)
+
         assertEquals(1200.0, s4.precio(), 0.01);
     }
 

@@ -29,6 +29,10 @@ public class Cliente {
         this.seguros = seguros;
     }
 
+    public void setSeguro(Seguro seguro) {
+        this.seguros.add(seguro);
+    }
+
     /**
      * Retorna el nombre del cliente.   
      */
