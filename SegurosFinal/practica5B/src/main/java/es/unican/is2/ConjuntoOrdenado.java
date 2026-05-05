@@ -16,17 +16,25 @@ public class ConjuntoOrdenado<E extends Comparable<E>> implements IConjuntoOrden
 	}
 
 	public boolean add(E elemento) {
-		int indice = 0;
-		if (elemento==null)
-			throw new NullPointerException();
-		if (lista.size() != 0) {
-			while (indice < lista.size() && elemento.compareTo(lista.get(indice)) < 0) {
-				indice++;
-			}
-		}
-		lista.add(indice, elemento);
-		return true;
-	}
+        if (elemento == null) {
+            throw new NullPointerException();
+        }
+        
+        int indice = 0;
+        while (indice < lista.size()) {
+            int comparacion = elemento.compareTo(lista.get(indice));
+            
+            if (comparacion == 0) {
+                return false;     
+            } else if (comparacion > 0) {
+                indice++;  
+            } else {
+                break;
+            }
+        }
+        lista.add(indice, elemento);
+        return true;
+    }
 
 	public E remove(int indice) {
 		E borrado = lista.remove(indice);

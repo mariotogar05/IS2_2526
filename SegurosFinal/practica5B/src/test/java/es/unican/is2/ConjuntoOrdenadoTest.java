@@ -10,7 +10,6 @@ public class ConjuntoOrdenadoTest {
 
     @BeforeEach
     public void setUp() {
-        // Inicializamos un nuevo conjunto antes de cada test
         conjunto = new ConjuntoOrdenado<Integer>();
     }
 
@@ -22,19 +21,21 @@ public class ConjuntoOrdenadoTest {
     public void testAddValidos() {
         // Caso: Añadir a una lista vacía
         assertTrue(conjunto.add(10));
-        assertEquals(10, conjunto.get(0));
-
-        // Caso: Añadir un elemento que debe ir al final (menor que el actual)
-        assertTrue(conjunto.add(5));
-        assertEquals(5, conjunto.get(1));
-
-        // Caso: Añadir un elemento que debe ir al principio (mayor que los actuales)
-        assertTrue(conjunto.add(20));
-        assertEquals(20, conjunto.get(0));
         
-        // Verificamos que la lista mantenga el tamaño y orden correctos: [20, 10, 5]
+        // Caso: Añadir un elemento que debe ir al principio
+        assertTrue(conjunto.add(5));
+        
+        // Caso: Añadir un elemento que debe ir al final
+        assertTrue(conjunto.add(20));
+        
+        // Verificamos que la lista mantenga el orden ascendente: [5, 10, 20]
+        assertEquals(5, conjunto.get(0));
         assertEquals(10, conjunto.get(1));
-        assertEquals(5, conjunto.get(2));
+        assertEquals(20, conjunto.get(2));
+        
+        // TEST DE DUPLICADOS: Intentamos añadir un elemento que ya existe
+        assertFalse(conjunto.add(10)); 
+        assertEquals(3, conjunto.size());
     }
 
     @Test
@@ -51,25 +52,24 @@ public class ConjuntoOrdenadoTest {
 
     @Test
     public void testGetValidos() {
-        // Preparamos el entorno de prueba con una lista.length > 0
-        conjunto.add(10);
+        // Preparamos el entorno añadiendo elementos desordenados
         conjunto.add(20);
+        conjunto.add(10);
         conjunto.add(30); 
-        // El orden interno tras los add será [30, 20, 10]
+        // El orden interno tras los add será el correcto: [10, 20, 30]
 
-        // Caso válido: Índice 0 (primer elemento)
-        assertEquals(30, conjunto.get(0));
+        // Caso válido: Índice 0 (primer elemento, el menor)
+        assertEquals(10, conjunto.get(0));
 
         // Caso válido: Índice intermedio (ej. 1)
         assertEquals(20, conjunto.get(1));
 
-        // Caso válido: Índice numElementos - 1 (último elemento)
-        assertEquals(10, conjunto.get(2));
+        // Caso válido: Índice numElementos - 1 (último elemento, el mayor)
+        assertEquals(30, conjunto.get(2));
     }
 
     @Test
     public void testGetNoValidos() {
-        // Preparamos una lista con elementos para probar límites
         conjunto.add(10);
         conjunto.add(20);
         conjunto.add(30); // numElementos = 3
@@ -97,23 +97,23 @@ public class ConjuntoOrdenadoTest {
 
     @Test
     public void testRemoveValidos() {
+        conjunto.add(30);
         conjunto.add(10);
-        conjunto.add(20);
-        conjunto.add(30); 
-        // El orden interno será [30, 20, 10]
+        conjunto.add(20); 
+        // El orden interno será [10, 20, 30]
 
-        // Caso: Eliminar índice intermedio
-        conjunto.remove(1); // Elimina el 20
-        // La lista debe quedar [30, 10]
+        // Caso: Eliminar índice intermedio (índice 1 es el valor 20)
+        conjunto.remove(1); 
+        // La lista debe quedar [10, 30]
         assertEquals(2, conjunto.size());
-        assertEquals(30, conjunto.get(0));
-        assertEquals(10, conjunto.get(1));
-
-        // Caso: Eliminar el primer elemento (índice 0)
-        conjunto.remove(0); // Elimina el 30
-        // La lista debe quedar [10]
-        assertEquals(1, conjunto.size());
         assertEquals(10, conjunto.get(0));
+        assertEquals(30, conjunto.get(1));
+
+        // Caso: Eliminar el primer elemento (índice 0 es el valor 10)
+        conjunto.remove(0); 
+        // La lista debe quedar solo con el [30]
+        assertEquals(1, conjunto.size());
+        assertEquals(30, conjunto.get(0));
     }
 
     @Test
@@ -152,9 +152,7 @@ public class ConjuntoOrdenadoTest {
         conjunto.add(1);
         conjunto.add(2);
         conjunto.add(3);
-        conjunto.add(4);
-        conjunto.add(5);
-        assertEquals(5, conjunto.size());
+        assertEquals(3, conjunto.size());
     }
 
     // ==========================================
@@ -166,10 +164,8 @@ public class ConjuntoOrdenadoTest {
         // Caso: Vaciar lista con elementos
         conjunto.add(1);
         conjunto.add(2);
-        conjunto.add(3);
-        conjunto.add(4);
-        conjunto.add(5);
         conjunto.clear();
+        
         assertEquals(0, conjunto.size());
         // Verificamos adicionalmente que intente acceder lance excepción al estar vacía
         assertThrows(IndexOutOfBoundsException.class, () -> {
